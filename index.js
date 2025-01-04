@@ -22,3 +22,5 @@ AppDataSource.initialize()
 app.listen(process.env.PORT, () => {
     console.log(`Server runing on PORT ${process.env.PORT}`);
 });
+
+exports.cloudFunctions = app;
