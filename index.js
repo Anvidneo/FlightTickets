@@ -20,5 +20,5 @@ AppDataSource.initialize()
     });
 
 app.listen(process.env.PORT, () => {
-    console.log('El servidor está escuchando en el puerto 3000');
+    console.log(`Server runing on PORT ${process.env.PORT}`);
 });
