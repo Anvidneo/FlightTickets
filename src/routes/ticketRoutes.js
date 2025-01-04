@@ -4,6 +4,6 @@ const { generateTicket } = require("../controllers/ticketController");
 
 const router = express.Router();
 
-router.get("/generate", authenticateToken, generateTicket);
+router.post("/generate", authenticateToken, generateTicket);
 
 module.exports = router;
