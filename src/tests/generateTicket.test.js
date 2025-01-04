@@ -2,7 +2,6 @@ const { generateTicket } = require('../controllers/ticketController');
 const { AppDataSource } = require("../config/data-source");
 const { _response } = require('../utils/helpers');
 const PDFDocument = require('pdfkit');
-const path = require('path');
 
 jest.mock('../config/data-source', () => ({
     AppDataSource: {
@@ -13,22 +12,6 @@ jest.mock('../config/data-source', () => ({
 jest.mock('../utils/helpers', () => ({
     _response: jest.fn(),
 }));
-
-jest.mock('pdfkit', () => {
-    const mockDoc = {
-        image: jest.fn(),
-        font: jest.fn(),
-        fontSize: jest.fn(),
-        text: jest.fn(),
-        pipe: jest.fn(),
-        end: jest.fn(),
-        openImage: jest.fn(() => ({ width: 100, height: 50 })),
-    };
-
-    const mockPDFDocument = jest.fn(() => mockDoc);
-    mockPDFDocument.mockDoc = mockDoc;
-    return mockPDFDocument;
-});
 
 describe('generateTicket', () => {
     let mockReq, mockRes, mockRepository;
@@ -63,6 +46,36 @@ describe('generateTicket', () => {
         jest.clearAllMocks();
     });
 
+    it('should return 200 and generate a PDF ticket successfully', async () => {
+        const mockClient = {
+            id: 2,
+            name: 'Juan D Botero C',
+        };
+    
+        const mockFlight = {
+            id: 2,
+            origin: 'Rionegro',
+            destination: 'Miami',
+            seat: '1',
+        };
+    
+        mockRepository.findOne
+            .mockResolvedValueOnce(mockFlight)
+            .mockResolvedValueOnce(mockClient);
+    
+        const mockWriteHead = jest.fn();
+        mockRes.writeHead = mockWriteHead;
+    
+        await generateTicket(mockReq, mockRes);
+    
+        expect(mockRepository.findOne).toHaveBeenNthCalledWith(1, { where: { id: mockTicket.flightId } });
+        expect(mockRepository.findOne).toHaveBeenNthCalledWith(2, { where: { id: mockTicket.clientId } });
+        expect(mockRes.writeHead).toHaveBeenCalledWith(200, {
+            "Content-Type": "application/pdf",
+            "Content-Disposition": `attachment; filename=${mockTicket.clientId}.pdf`,
+        });
+    });
+    
     it('should return 404 if flight not found', async () => {
         mockRepository.findOne.mockResolvedValueOnce(null);
 
@@ -113,8 +126,8 @@ describe('generateTicket', () => {
     });
 
     it('should return 500 if PDF generation fails', async () => {
-        const mockDoc = PDFDocument.mockDoc;
-        mockDoc.end.mockImplementation(() => {
+        const mockDoc = new PDFDocument();
+        mockDoc.end(() => {
             throw new Error('PDF generation error');
         });
 
