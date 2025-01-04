@@ -45,14 +45,14 @@ const generateTicket = async (req, res) => {
         doc.text(ticket.destination, 360, 75);
         doc.text(datetime, 285, 97);
         doc.text(ticket.seat, 285, 120);
-        doc.pipe(res);
         
-        doc.end();
-
         res.writeHead(200, {
             "Content-Type": "application/pdf",
             "Content-Disposition": `attachment; filename=${clientId}.pdf`,
         });
+        
+        doc.pipe(res);
+        doc.end();
     } catch (error) {
         console.error("Error generating ticket:", error);
         return res.status(500).json(_response(500, 'Error generating ticket'));
