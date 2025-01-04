@@ -1,0 +1,33 @@
+{
+  "name": "flightstickets",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anvidneo/FlightsTickets.git"
+  },
+  "author": "Anvid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anvidneo/FlightsTickets/issues"
+  },
+  "homepage": "https://github.com/Anvidneo/FlightsTickets#readme",
+  "description": "",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "data-source": "^5.3.2",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.9",
+    "pdfkit": "^0.16.0",
+    "typeorm": "^0.3.20"
+  }
+}
