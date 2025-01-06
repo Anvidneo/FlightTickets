@@ -36,6 +36,3 @@ Thumbs.db
 # Sonar
 .scannerwork
 sonar-project.properties
-
-# DataSource
-src/config/data-source.js
