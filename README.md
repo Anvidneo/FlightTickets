@@ -30,12 +30,10 @@ This is a code on NodeJs and Express, using libraries like JWT, PDFKit, TypeORM,
 
 3. **Set up environment variables**
 
-    Create a `.env` file in the root directory of your project and configure the necessary environment variables. Example:
+    Create a `.env` file in the root directory of your project and configure the necessary environment variables. Like the .env.example exist on root directory
 
-    ```bash
-    PORT = 3000
-    JWT_SECRET = 497d60d3d1d864310c890856639abbba9582b0c98468cb4222ca4e976badf77d
-    ```
+    On src/config/ create a file with name data-source.js like the example on the same foldee, change the data with information shared with you.
+
 
 ## Running the API 🏃🏼‍♂️
 
