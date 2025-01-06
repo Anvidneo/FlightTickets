@@ -6,11 +6,11 @@ const User = require("../models/User");
 
 const AppDataSource = new DataSource({
     type: "mysql",
-    host: "your-ip",
-    port: your-port,
-    username: "your-username",
-    password: "your-password",
-    database: "your-database",
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
     entities: [User, Client, Ticket],
     synchronize: true,
     logging: false,
