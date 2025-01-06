@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "cloud": "functions-framework --target=cloudFunctions",
     "start": "node index.js",
     "test": "jest",
     "dev": "nodemon index.js"
