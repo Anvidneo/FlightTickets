@@ -19,6 +19,6 @@ AppDataSource.initialize()
         console.error("Error during Data Source initialization", err);
     });
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server runing on PORT ${process.env.PORT}`);
+app.listen(secrets.PORT || 8080, () => {
+    console.log(`Server runing on PORT ${secrets.PORT || 8080}`);
 });
