@@ -46,5 +46,5 @@ jobs:
             --image ${{ env.DOCKER_IMAGE_URL }}:latest \
             --platform managed \
             --region us-east1 \
-            --allow-unauthenticated
+            --allow-unauthenticated \
             --set-env-vars "PORT=${{ secrets.PORT }},JWT_SECRET=${{ secrets.JWT_SECRET }},DB_HOST=${{ secrets.DB_HOST }},DB_PORT=${{ secrets.DB_PORT }},DB_USERNAME=${{ secrets.DB_USERNAME }},DB_PASSWORD=${{ secrets.DB_PASSWORD }},DB_DATABASE=${{ secrets.DB_DATABASE }}"
